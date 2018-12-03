@@ -9,17 +9,37 @@
           <h3 class="mb-0">Login</h3>
         </div>
         <div class="card-body">
-          <form class="form">
-            <div class="form-group">
-              <label for="uname1">Username</label>
-              <input type="text" class="form-control rounded-0" [(ngModel)]="loginUserData.email" name="email" required>
+            <div class="loader" *ngIf="dataLoading"></div>
+            <div class="alert alert-danger" role="alert" *ngIf="error">
+              An error occured. Here is the error : {{ errorMessage }}.
             </div>
-            <div class="form-group">
-              <label>Password</label>
-              <input type="password" class="form-control rounded-0" [(ngModel)]="loginUserData.password" name="password" required>
-            </div>
-            <button type="button" (click)="loginUser()" class="btn btn-success float-right">Login</button>
-          </form>
+            <span class="lead">
+            <form class="form-signin" #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
+              <div class="form-label-group">
+                <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" #inputEmail="ngModel" autofocus required email ngModel>
+              </div>
+              <div class="alert alert-danger" role="alert" *ngIf="inputEmail.invalid && (inputEmail.dirty || inputEmail.touched)">
+                Please enter a valid email.
+              </div>
+              <br/>
+              <div class="form-label-group">
+                <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" #inputPassword="ngModel" required minlength="3" maxlength="20" ngModel>
+              </div>
+              <div class="alert alert-danger" role="alert" *ngIf="inputPassword.invalid && (inputPassword.dirty || inputPassword.touched)">
+                Please enter a valid password between 3 to 20 chars.
+              </div>
+              <br/>
+              <div *ngIf="!loginForm.valid else showSubmitButton">
+                <button class="btn btn-lg btn-block btn-block" type="submit" disabled>Sign in</button>
+              </div>
+              <ng-template #showSubmitButton>
+                <button class="btn btn-success btn-block" type="submit">Sign in</button>
+              </ng-template>
+              <p class="mt-5 mb-3 text-muted text-center">
+                <a routerLink="/register">Create New Account</a>
+              </p>
+            </form>
+          </span>
         </div>
         <!--/card-block-->
       </div>

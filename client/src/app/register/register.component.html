@@ -9,25 +9,54 @@
           <h3 class="mb-0">Register</h3>
         </div>
         <div class="card-body">
-          <form class="form">
-              <div class="form-group">
-                  <label for="uname1">Username</label>
-                  <input type="text" [(ngModel)]="registerUserData.name" name="name" class="form-control rounded-0" required>
-                </div>
-            <div class="form-group">
-              <label for="uname1">Email</label>
-              <input type="text" [(ngModel)]="registerUserData.email" name="email" class="form-control rounded-0" required>
+            <div class="loader" *ngIf="dataLoading"></div>
+            <div class="alert alert-danger" role="alert" *ngIf="error">
+              An error occured. Here is the error : {{ errorMessage }}.
             </div>
-            <div class="form-group">
-              <label>Password</label>
-              <input type="password" [(ngModel)]="registerUserData.password" name="password" class="form-control rounded-0"  required>
+            <div *ngIf="savedChanges else showForm">
+              New Account is created. Please login.
+              <button class="btn btn-lg btn-primary btn-block" routerLink="/login" type="button">Login</button>
             </div>
-            <div class="form-group">
-                <label>Confirm Password</label>
-                <input type="password" [(ngModel)]="registerUserData.password" name="password" class="form-control rounded-0"  required>
-              </div>
-            <button type="button" (click)="registerUser()" class="btn btn-primary float-right">Register</button>
-          </form>
+            <ng-template #showForm>
+              <span class="lead">
+                <form class="form-signin" #newUserForm="ngForm" (ngSubmit)="setUser(newUserForm.value)">
+                    <div class="form-label-group">
+                        <input type="text" name="inputUsername" id="inputUsername" class="form-control" placeholder="Name" #inputUsername="ngModel"
+                          autofocus required ngModel>
+                      </div>
+                      <div style="color:red" role="alert" *ngIf="inputUsername.invalid && (inputUsername.dirty || inputUsername.touched)">
+                        Please enter a valid Name.
+                      </div>
+                      <br/>
+                  <div class="form-label-group">
+                    <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" #inputEmail="ngModel"
+                      autofocus required email ngModel>
+                  </div>
+                  <div style="color:red" role="alert" *ngIf="inputEmail.invalid && (inputEmail.dirty || inputEmail.touched)">
+                    Please enter a valid email.
+                  </div>
+                  <br/>
+                  
+                  <div class="form-label-group">
+                    <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" #inputPassword="ngModel"
+                      required minlength="3" maxlength="20" ngModel>
+                  </div>
+                  <div style="color:red" role="alert" *ngIf="inputPassword.invalid && (inputPassword.dirty || inputPassword.touched)">
+                    Please enter a valid password between 3 to 20 chars.
+                  </div>
+                  <br/>
+                  <div *ngIf="!newUserForm.valid else showSubmitButton">
+                    <button class="btn btn-lg btn-block btn-block" type="submit" disabled>Sign up</button>
+                  </div>
+                  <ng-template #showSubmitButton>
+                    <button class="btn btn-primary btn-block" type="submit">Sign up</button>
+                  </ng-template>
+                  <p class="mt-5 mb-3 text-muted text-center">
+                    <a routerLink="/login">Login</a>
+                  </p>
+                </form>
+              </span>
+            </ng-template>
         </div>
         <!--/card-block-->
       </div>
