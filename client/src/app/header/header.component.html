@@ -6,14 +6,15 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <!-- <li class="nav-item">
-        <a class="nav-link" routerLink="/events" routerLinkActive="active">Events</a>
+   <li class="nav-item">
+        <a class="nav-link" routerLink="/dashboard" routerLinkActive="active" >Dashboard</a>
       </li>
-      <li class="nav-item">
+        <!--  <li class="nav-item">
         <a class="nav-link" routerLink="/special" routerLinkActive="active">Members</a>
       </li> -->
     </ul>
     <ul class="navbar-nav">
+            <a class="nav-link" style="cursor:pointer" routerLinkActive="active" routerLink="/settings">Settings</a>
         <a class="nav-link" style="cursor:pointer"   routerLink="/login" routerLinkActive="active">Login</a>
         <a class="nav-link" style="cursor:pointer"   routerLink="/register" routerLinkActive="active">Register</a>
         <!--*ngIf="!authService.loggedIn()"
