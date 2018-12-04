@@ -7,9 +7,10 @@
       <div class="card rounded-0">
         <div class="card-header">
           <h3 class="mb-0">Register</h3>
+         
         </div>
         <div class="card-body">
-            <div class="loader" *ngIf="dataLoading"></div>
+          <div class="loader" *ngIf="dataLoading"></div>
             <div class="alert alert-danger" role="alert" *ngIf="error">
               An error occured. Here is the error : {{ errorMessage }}.
             </div>
@@ -21,27 +22,27 @@
               <span class="lead">
                 <form class="form-signin" #newUserForm="ngForm" (ngSubmit)="setUser(newUserForm.value)">
                     <div class="form-label-group">
-                        <input type="text" name="inputUsername" id="inputUsername" class="form-control" placeholder="Name" #inputUsername="ngModel"
+                        <input type="text" name="Username" id="Username" class="form-control" placeholder="Name" #Username="ngModel"
                           autofocus required ngModel>
                       </div>
-                      <div style="color:red" role="alert" *ngIf="inputUsername.invalid && (inputUsername.dirty || inputUsername.touched)">
+                      <div style="color:red" role="alert" *ngIf="Username.invalid && (Username.dirty || Username.touched)">
                         Please enter a valid Name.
                       </div>
                       <br/>
                   <div class="form-label-group">
-                    <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" #inputEmail="ngModel"
+                    <input type="email" name="Email" id="Email" class="form-control" placeholder="Email address" #Email="ngModel"
                       autofocus required email ngModel>
                   </div>
-                  <div style="color:red" role="alert" *ngIf="inputEmail.invalid && (inputEmail.dirty || inputEmail.touched)">
+                  <div style="color:red" role="alert" *ngIf="Email.invalid && (Email.dirty || Email.touched)">
                     Please enter a valid email.
                   </div>
                   <br/>
                   
                   <div class="form-label-group">
-                    <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" #inputPassword="ngModel"
+                    <input type="password" name="Password" id="Password" class="form-control" placeholder="Password" #Password="ngModel"
                       required minlength="3" maxlength="20" ngModel>
                   </div>
-                  <div style="color:red" role="alert" *ngIf="inputPassword.invalid && (inputPassword.dirty || inputPassword.touched)">
+                  <div style="color:red" role="alert" *ngIf="Password.invalid && (Password.dirty || Password.touched)">
                     Please enter a valid password between 3 to 20 chars.
                   </div>
                   <br/>
