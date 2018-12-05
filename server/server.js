@@ -68,6 +68,24 @@ app.post('/login', jsonParser, function (req, res) {
     var dbFunctions = require('./models/controller');
     dbFunctions.loginUser(req,res);
 });
+app.get('/user', jsonParser, function (req, res) {
+    //if(valFunctions.checkInputDataNULL(req,res)) return false;
+    //if(valFunctions.checkInputDataQuality(req,res)) return false;
+    //if(valFunctions.checkUserAuthRole(req,res)) return false;
+    var dbFunctions = require('./models/controller');
+    var userEmail = valFunctions.checkJWTToken(req,res);
+    if(!userEmail) return false;
+    dbFunctions.getUser(userEmail,res);
+});
+app.post('/updateuser', jsonParser, function (req, res) {
+    if(valFunctions.checkInputDataNULL(req,res)) return false;
+    if(valFunctions.checkInputDataQuality(req,res)) return false;
+    //if(valFunctions.checkUserAuthRole(req,res)) return false;
+    var dbFunctions = require('./models/controller');
+    var userEmail = valFunctions.checkJWTToken(req,res);
+    if(!userEmail) return false;
+    dbFunctions.updateUser(userEmail,req,res);
+});
 app.use('/', (req, res) => res.send("Welcome to Billezy!"));
 app.listen(PORT, function(){
     console.log("Server running on localhost:" + PORT);
