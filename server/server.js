@@ -1,20 +1,51 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors')
-//const path = require('path');
-const PORT = 3000;
-const api = require('./routes/api');
 const app = express();
-app.use(cors()); 
-//app.use(express.static(path.join(__dirname, 'dist')));
+// store config variables in dotenv
+//require('dotenv').config();
+const PORT = 3500;
+const cors = require('cors');
 
-app.use(bodyParser.json()); 
+// ****** allow cross-origin requests code START ****** //
+app.use(cors()); // uncomment this to enable all CORS and delete cors(corsOptions) in below code
+//const allowedOrigins = process.env.allowedOrigins.split(',');
+/**
+app.use(cors({
+    origin: function (origin, callback) {
+        // allow requests with no origin 
+        // (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            var msg = 'The CORS policy for this site does not ' + 'allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    }
+}));
+ */
+// ****** allow cross-origin requests code END ****** //
 
-app.use('/api', api);
+// ****** validation rules START ****** //
+const valFunctions = require('./validators/validate');
+// ****** validation rules END ****** //
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'dist/index.html'));
-// });
+// app Routes
+// create application/json parser
+const jsonParser = bodyParser.json()
+// create application/x-www-form-urlencoded parser
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
+ 
+// POST /login gets urlencoded bodies
+app.post('/register', jsonParser, function (req, res) {
+    if(valFunctions.checkInputDataNULL(req,res)) return false;
+    if(valFunctions.checkInputDataQuality(req,res)) return false;
+    //if(valFunctions.checkJWTToken(req,res)) return false;
+    //if(valFunctions.checkUserAuthRole(req,res)) return false;
+    var dbFunctions = require('./models/controller');
+    dbFunctions.createUser(req,res);
+});
 
-app.use('/', (req, res) => res.send("Welcome to Billezy !"));
-app.listen(process.env.PORT, () => console.log('Server is ready on localhost:' + PORT));
+app.use('/', (req, res) => res.send("Welcome to Billezy!"));
+app.listen(PORT, function(){
+    console.log("Server running on localhost:" + PORT);
+});
