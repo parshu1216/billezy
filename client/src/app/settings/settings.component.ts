@@ -18,9 +18,9 @@ export class SettingsComponent implements OnInit {
   constructor(private _backendService: BackendService, private _route: Router) { }
 
   ngOnInit() {
-    this.getData();
+    //this.getData();
   }
-
+/*
   getData(){
     this.dataLoading = true;
     this.querySubscription = this._backendService.getUser().subscribe((res) => {
@@ -73,7 +73,7 @@ export class SettingsComponent implements OnInit {
           this.dataLoading = false;
       });
 }
-
+*/
 ngOnDestroy(){
   if (this.querySubscription) {
     this.querySubscription.unsubscribe();

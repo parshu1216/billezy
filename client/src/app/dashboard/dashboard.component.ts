@@ -22,15 +22,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(private _backendService: BackendService) { }
 
-  ngOnInit() {
+  ngOnInit() {/*
     const secondsCounter = interval(200000);
     // Subscribe to begin publishing values
     this.querySubscription = secondsCounter.subscribe(n =>
       //console.log(`It's been ${n} seconds since subscribing!`)
       this.getLocations()); 
-      this.getUserLoc();
+      this.getUserLoc();*/
   }
-  
+ /* 
   getLocations() {
     var positionOption = { enableHighAccuracy: false, maximumAge: Infinity, timeout: 60000 };
     var gpsSunccuss = function (currentPosition) {
@@ -75,6 +75,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.dataLoading = false;
       });
   }
+  */
     ngOnDestroy(){
       if(this.querySubscription){
         // uncomment this if you want app to continuosly capture location when app is in memory
