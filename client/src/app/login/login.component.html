@@ -4,7 +4,7 @@
       <span class="anchor" id="formLogin"></span>
 
       <!-- form card login -->
-      <div class="card rounded-0">
+      <div class="card rounded-100">
         <div class="card-header">
           <h3 class="mb-0">Login</h3>
         </div>
@@ -18,25 +18,23 @@
               <div class="form-label-group">
                 <input type="email" name="Email" id="Email" class="form-control" placeholder="Email address" #Email="ngModel" autofocus required email ngModel>
               </div>
-              <div class="alert alert-danger" role="alert" *ngIf="Email.invalid && (Email.dirty || Email.touched)">
+              <div style="color:red" role="alert" *ngIf="Email.invalid && (Email.dirty || Email.touched)">
                 Please enter a valid email.
               </div>
               <br/>
               <div class="form-label-group">
                 <input type="password" name="Password" id="Password" class="form-control" placeholder="Password" #Password="ngModel" required minlength="3" maxlength="20" ngModel>
               </div>
-              <div class="alert alert-danger" role="alert" *ngIf="Password.invalid && (Password.dirty || Password.touched)">
+              <div style="color:red" role="alert" *ngIf="Password.invalid && (Password.dirty || Password.touched)">
                 Please enter a valid password between 3 to 20 chars.
               </div>
               <br/>
-              <div *ngIf="!loginForm.valid else showSubmitButton">
-                <button class="btn btn-block btn-block" type="submit" disabled>Sign in</button>
-              </div>
-              <ng-template #showSubmitButton>
+              <div>
                 <button class="btn btn-success btn-block" type="submit">Sign in</button>
-              </ng-template>
+              </div>
               <p class="mt-5 mb-3 text-muted text-center">
-                <a routerLink="/register">Create New Account</a>
+                  Don't Have Account?? 
+                <a routerLink="/register">Register Here</a>
               </p>
             </form>
           </span>
@@ -44,9 +42,6 @@
         <!--/card-block-->
       </div>
       <!-- /form card login -->
-
     </div>
-
-
   </div>
 </div>
