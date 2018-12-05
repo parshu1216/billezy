@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 // store config variables in dotenv
-//require('dotenv').config();
+require('dotenv').config();
 const PORT = 3500;
 const cors = require('cors');
 
@@ -34,7 +34,21 @@ const valFunctions = require('./validators/validate');
 const jsonParser = bodyParser.json()
 // create application/x-www-form-urlencoded parser
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
- 
+function verifyToken (req, res, next) {
+    if(!req.headers.authorization) {
+      return res.status(401).send('Unauthorized request')
+    }
+    let token = req.headers.authorization.split(' ')[1]
+    if(token === 'null') {
+      return res.status(401).send('Unauthorized request')    
+    }
+    let payload = jwt.verify(token, process.env.JWT_SECRET)
+    if(!payload) {
+      return res.status(401).send('Unauthorized request')    
+    }
+    req.userId = payload.subject
+    next()
+  }
 // POST /login gets urlencoded bodies
 app.post('/register', jsonParser, function (req, res) {
     if(valFunctions.checkInputDataNULL(req,res)) return false;
@@ -45,6 +59,15 @@ app.post('/register', jsonParser, function (req, res) {
     dbFunctions.createUser(req,res);
 });
 
+app.post('/login', jsonParser, function (req, res) {
+    if(valFunctions.checkInputDataNULL(req,res)) return false;
+    if(valFunctions.checkInputDataQuality(req,res)) return false;
+    //if(valFunctions.checkJWTToken(req,res)) return false;
+    //if(valFunctions.checkUserAuthRole(req,res)) return false;
+
+    var dbFunctions = require('./models/controller');
+    dbFunctions.loginUser(req,res);
+});
 app.use('/', (req, res) => res.send("Welcome to Billezy!"));
 app.listen(PORT, function(){
     console.log("Server running on localhost:" + PORT);

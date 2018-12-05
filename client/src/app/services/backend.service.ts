@@ -31,7 +31,42 @@ export class BackendService {
     return this._http.post('http://localhost:3500/register', formData, httpOptions);
   }
 
-  /*loggedIn() {
-    return !!localStorage.getItem('token')    
-  }*/
+  
+  login(formData){
+    // let fakeResponse_1 = {
+    //   "errorCode" : "0",
+    //   "errorMessage" : "User Id is invalid",
+    //   "rowCount" : "30",
+    //   "data": {
+    //     "token" : "abcd"
+    //   }
+    // };
+    // let fakeResponse_2 = {
+    //   "errorCode" : "0",
+    //   "errorMessage" : "Password not valid.",
+    //   "rowCount" : "30",
+    //   "data": {
+    //     "token" : "abcd"
+    //   }
+    // };
+    // let fakeResponse_3 = {
+    //   "errorCode" : "1",
+    //   "errorMessage" : "Authentication Successful.",
+    //   "rowCount" : "30",
+    //   "data": {
+    //     "token" : "abcd"
+    //   }
+    // };
+    // return Observable.create(
+    //   observer => {
+    //     setTimeout(() => {
+    //       observer.next(fakeResponse_3)
+    //     }
+    //     ,2000)
+    //   });
+  let token = localStorage.getItem('token') ? localStorage.getItem('token') : "abcd";
+  let httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'token': token }) };
+  return this._http.post("http://localhost:3500/login", formData, httpOptions);
+  }
+
 }

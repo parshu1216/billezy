@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login(formData){
-    /*this.dataLoading = true;
+    this.dataLoading = true;
     this.querySubscription = this._backendService.login(formData).subscribe((res) => {
         if (res["errorCode"] > 0) {
           this.error = false;
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       },
       () => {
           this.dataLoading = false;
-      });*/
+      });
 }
 ngOnDestroy(){
   if (this.querySubscription) {

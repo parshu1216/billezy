@@ -12,7 +12,7 @@
         <div class="card-body">
           <div class="loader" *ngIf="dataLoading"></div>
             <div class="alert alert-danger" role="alert" *ngIf="error">
-              An error occured. Here is the error : {{ errorMessage }}.
+              An error occured!!!. Here is the error : {{ errorMessage }}.
             </div>
             <div *ngIf="savedChanges else showForm">
               New Account is created. Please login.
