@@ -53,7 +53,7 @@ export class SettingsComponent implements OnInit {
           this.errorMessage = "";
           this.dataLoading = false;
           this.savedChanges = true;
-          this._route.navigate(['/settingd']);
+          this._route.navigate(['/settings']);
 
       } else {
           this.error = true;
