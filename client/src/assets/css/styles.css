@@ -1,3 +1,24 @@
+.icon-bar {
+  width: 100%;
+  background-color:#0077b5;
+  overflow: auto;
+}
+
+.icon-bar a {
+  float: left;
+  width: 20%;
+  text-align: center;
+  padding: 12px 0;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 20px;
+}
+
+.icon-bar a:hover {
+  background-color: #333;
+}
+
+
 .loader {
   color: #0077b5;
   font-size: 20px;
