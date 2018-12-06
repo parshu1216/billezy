@@ -32,9 +32,12 @@
                 Please enter a valid password between 3 to 20 chars.
               </div>
               <br/>
-              <div>
-                <button class="btn btn-success btn-block" type="submit">Sign in</button>
-              </div>
+              <div *ngIf="!loginForm.valid else showSubmitButton">
+                  <button class="btn btn-block btn-success" type="submit" disabled>Sign in</button>
+                </div>
+                <ng-template #showSubmitButton>
+                  <button class="btn btn-block btn-success" type="submit">Sign in</button>
+                </ng-template>
               <p class="mt-5 mb-3 text-muted text-center">
                   Don't Have Account?? 
                 <a routerLink="/register">Register Here</a>
