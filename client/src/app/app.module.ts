@@ -8,7 +8,6 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
@@ -18,7 +17,6 @@ import { SettingsComponent } from './settings/settings.component';
     FooterComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent,
     SettingsComponent
   ],
   imports: [

@@ -34,21 +34,7 @@ const valFunctions = require('./validators/validate');
 const jsonParser = bodyParser.json()
 // create application/x-www-form-urlencoded parser
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
-function verifyToken (req, res, next) {
-    if(!req.headers.authorization) {
-      return res.status(401).send('Unauthorized request')
-    }
-    let token = req.headers.authorization.split(' ')[1]
-    if(token === 'null') {
-      return res.status(401).send('Unauthorized request')    
-    }
-    let payload = jwt.verify(token, process.env.JWT_SECRET)
-    if(!payload) {
-      return res.status(401).send('Unauthorized request')    
-    }
-    req.userId = payload.subject
-    next()
-  }
+
 // POST /login gets urlencoded bodies
 app.post('/register', jsonParser, function (req, res) {
     if(valFunctions.checkInputDataNULL(req,res)) return false;

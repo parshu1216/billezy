@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.errorMessage = "";
           this.dataLoading = false;
           window.localStorage.setItem('token', res["data"].token);
-          this._route.navigate(['/dashboard']);
+          this._route.navigate(['/settings']);
       } else {
           this.error = true;
           this.errorMessage = res["errorMessage"];
